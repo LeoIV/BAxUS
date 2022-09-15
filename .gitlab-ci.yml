@@ -139,6 +139,6 @@ docker-deploy:
     - dind # docker in docker
   script:
     - docker build -t ${DOCKER_IMAGE_NAME} .
-    - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+    - echo ${DOCKER_PASSWORD} | docker login -u="${DOCKER_USERNAME}" --password-stdin
     - docker push ${DOCKER_IMAGE_NAME}
 
