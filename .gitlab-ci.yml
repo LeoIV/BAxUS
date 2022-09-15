@@ -4,10 +4,9 @@ variables:
 cache:
   paths:
     - .cache/pip
-#    - venv/
 
-before_script: # llvm-3.9 libgfortran-7-dev
-  - python3 -V  # Print out python version for debugging a
+before_script:
+  - python3 -V
   - pip --version
   - python --version
   - ulimit -n
@@ -18,12 +17,12 @@ before_script: # llvm-3.9 libgfortran-7-dev
   - virtualenv venv
   - source venv/bin/activate
 
-stages: # List of stages for jobs, and their order of execution
+stages:
   - test
   - deploy
 
-.pip-test-base: # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+.pip-test-base:
+  stage: test
   script:
     - pip install wheel numpy
     - pip install --no-cache-dir "gpytorch<=1.8.1"
@@ -39,8 +38,8 @@ stages: # List of stages for jobs, and their order of execution
       cobertura: coverage.xml
       junit: report.xml
 
-.requirements-test-base: # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+.requirements-test-base:
+  stage: test
   script:
     - pip install -r requirements.txt
     - pip install pytest pytest-cov coverage

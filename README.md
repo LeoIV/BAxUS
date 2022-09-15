@@ -1,4 +1,7 @@
-# BAxUS repository
+# Increasing the Scope as You Learn: BAxUS
+
+--------------------------------
+[![pipeline status](http://gitlab.papenmeier.io/root/baxus-paper-version/badges/main/pipeline.svg)](http://gitlab.papenmeier.io/root/baxus-paper-version/-/commits/main) [![coverage report](http://gitlab.papenmeier.io/root/baxus-paper-version/badges/main/coverage.svg)](http://gitlab.papenmeier.io/root/baxus-paper-version/-/commits/main)
 
 This is the code for our paper:
 `Increasing the Scope as You Learn: Adaptive Bayesian Optimization in Nested Subspaces`
