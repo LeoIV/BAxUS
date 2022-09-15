@@ -4,4 +4,4 @@ Original TuRBO implementation written by:
 
 BAxUS code written by:
 
-- anonymous
+- Leonard Papenmeier <leonard.papenmeier@cs.lth.se>
