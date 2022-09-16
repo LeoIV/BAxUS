@@ -163,5 +163,16 @@ publish-test-pypi:
     - python setup.py sdist
     - twine upload -u __token__ -p ${TWINE_TEST_PYPI_PASSWORD} -r testpypi dist/*
 
+publish-pypi:
+  stage: deploy
+  image: python:3.10-buster
+  only:
+    - main
+    - tags
+  script:
+    - pip install --upgrade twine
+    - python setup.py sdist
+    - twine upload -u __token__ -p ${TWINE_PYPI_PASSWORD} dist/*
+
 
 
