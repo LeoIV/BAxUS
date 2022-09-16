@@ -66,16 +66,22 @@ pip-test-buster-3.10:
   image: python:3.10-buster
 
 pip-test-bullseye-3.8:
+  only:
+    - main
   extends: .pip-test-base
   stage: test
   image: python:3.8-bullseye
 
 pip-test-bullseye-3.9:
+  only:
+    - main
   extends: .pip-test-base
   stage: test
   image: python:3.9-bullseye
 
 pip-test-bullseye-3.10:
+  only:
+    - main
   extends: .pip-test-base
   stage: test
   image: python:3.10-bullseye
@@ -86,6 +92,8 @@ requirements-test-buster-3.10:
   image: python:3.10-buster
 
 requirements-test-bullseye-3.10:
+  only:
+    - main
   extends: .requirements-test-base
   stage: test
   image: python:3.10-bullseye
@@ -106,8 +114,7 @@ docker-test:
 build-docs:
   stage: deploy
   only:
-    refs:
-      - main
+    - main
   image: python:3.10-buster
   script:
     - apt-get update
@@ -130,8 +137,7 @@ build-docs:
 docker-deploy:
   stage: deploy
   only:
-    refs:
-      - main
+    - main
   image: docker:20.10.16
   services:
     - docker:20.10.16-dind
