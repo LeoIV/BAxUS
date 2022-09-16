@@ -100,8 +100,6 @@ requirements-test-bullseye-3.10:
 
 docker-test:
   stage: test
-  before_script:
-    - ''
   image: docker:20.10.16
   services:
     - docker:20.10.16-dind
@@ -110,6 +108,7 @@ docker-test:
   script:
     - docker build -t ${DOCKER_IMAGE_NAME} .
     - docker run ${DOCKER_IMAGE_NAME} /bin/bash -c "pip install pytest pytest-cov coverage && python -m pytest -v --cov=baxus/ --junitxml=report.xml tests/"
+
 
 build-docs:
   stage: deploy
