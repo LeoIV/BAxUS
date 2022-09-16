@@ -141,7 +141,7 @@ build-docs:
 docker-deploy:
   stage: deploy
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG'
+    - if: $CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TAG != ""
   image: docker:20.10.16
   before_script:
     - ''
@@ -158,7 +158,7 @@ publish-test-pypi:
   stage: deploy
   image: python:3.10-buster
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG'
+    - if: $CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TAG != ""
   script:
     - pip install --upgrade twine
     - python setup.py sdist
@@ -168,11 +168,8 @@ publish-pypi:
   stage: deploy
   image: python:3.10-buster
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG'
+    - if: $CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TAG != ""
   script:
     - pip install --upgrade twine
     - python setup.py sdist
     - twine upload -u __token__ -p ${TWINE_PYPI_PASSWORD} dist/*
-
-
-
