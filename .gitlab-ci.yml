@@ -6,9 +6,6 @@ cache:
     - .cache/pip
 
 before_script:
-  - python3 -V
-  - pip --version
-  - python --version
   - ulimit -n
   - apt-get update
   - apt-get -y upgrade
@@ -108,6 +105,9 @@ docker-test:
 
 build-docs:
   stage: deploy
+  only:
+    refs:
+      - main
   image: python:3.10-buster
   script:
     - apt-get update
@@ -129,8 +129,9 @@ build-docs:
 
 docker-deploy:
   stage: deploy
-  before_script:
-    - ''
+  only:
+    refs:
+      - main
   image: docker:20.10.16
   services:
     - docker:20.10.16-dind
@@ -140,4 +141,14 @@ docker-deploy:
     - docker build -t ${DOCKER_IMAGE_NAME} .
     - echo ${DOCKER_PASSWORD} | docker login -u="${DOCKER_USERNAME}" --password-stdin
     - docker push ${DOCKER_IMAGE_NAME}
+
+publish-test-pypi:
+  stage: deploy
+  image: python:3.10-buster
+  script:
+    - pip install --upgrade twine
+    - python setup.py sdist
+    - twine upload -u ${TWINE_USERNAME} -p ${TWINE_TEST_PYPI_PASSWORD} -r testpypi dist/*
+
+
 

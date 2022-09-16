@@ -10,7 +10,7 @@
 ###############################################################################
 
 # Derived from the TuRBO implementation (https://github.com/uber-research/TuRBO)
-# Author: anonymous
+# Author: Leonard Papenmeier <leonard.papenmeier@cs.lth.se>
 
 import base64
 import math
@@ -56,7 +56,7 @@ class BAxUS(EmbeddedTuRBO):
 
     def __init__(
             self,
-            f,
+            f: Benchmark,
             target_dim: int,
             n_init: int,
             max_evals: int,
@@ -70,7 +70,7 @@ class BAxUS(EmbeddedTuRBO):
             conf_name: Optional[str] = None,
     ):
         self.behavior = behavior
-        # need to set this here so we can adjust the initial target dim before initializing super()
+        # need to set this here, so we can adjust the initial target dim before initializing super()
         self._input_dim = f.dim
         self._init_target_dim = target_dim
         if self.behavior.adjust_initial_target_dim:
@@ -485,7 +485,8 @@ class BAxUS(EmbeddedTuRBO):
 
         self._data_dims.extend([self.target_dim] * n_pts)
 
-    def _projector_as_base64(self, projector: ProjectionModel) -> str:
+    @staticmethod
+    def _projector_as_base64(projector: ProjectionModel) -> str:
         """
         Return the current projection model as a Base64 string.
         Args:
