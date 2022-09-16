@@ -3,16 +3,23 @@
 [![pipeline status](http://gitlab.papenmeier.io/root/baxus-paper-version/badges/main/pipeline.svg)](http://gitlab.papenmeier.io/root/baxus-paper-version/-/commits/main) [![coverage report](http://gitlab.papenmeier.io/root/baxus-paper-version/badges/main/coverage.svg)](http://gitlab.papenmeier.io/root/baxus-paper-version/-/commits/main)
 
 This is the code for our paper:
-`Increasing the Scope as You Learn: Adaptive Bayesian Optimization in Nested Subspaces` (Leonard Papenmeier, Matthias Poloczek, and Luigi Nardi)
+`Increasing the Scope as You Learn: Adaptive Bayesian Optimization in Nested Subspaces` (Leonard Papenmeier, Matthias
+Poloczek, and Luigi Nardi)
 
-Please see the full [online documentation](https://baxus.papenmeier.io). 
+Please see the full [online documentation](https://baxus.papenmeier.io).
 
 ## Installation
 
-You have 3 options for installing `BAxUS`: `Docker`, `setup.py`, or `requirements.txt`.
+You have four options for installing `BAxUS`: `PyPi`, `Docker`, `setup.py`, or `requirements.txt`.
 Please make sure to install the following packages before running the non-Docker `BAxUS` installation.
 We assume that you have a Debian Buster or Bullseye based Linux distribution (e.g., Ubuntu 18.04 or Ubuntu 20.04).
 Please use a Docker image if you are working with a different distribution:
+
+### Installation from PyPi
+
+```bash
+pip install baxus
+```
 
 ### Installation from source
 
@@ -66,12 +73,27 @@ The main file is `benchmark_runner.py` in the project root.
 It can be configured with command line arguments (see [Command Line Options](README.html))
 
 For example, to run `BAxUS` for 1,000 function evaluations on a Branin2 function with input dimensionality 100 for one
-repetition run
+repetition run (for installation from source)
 
 ```python
 python3
+benchmark_runner.py - id
+100 - td
+1 - n
+10 - r
+1 - m
+1000 - f
+branin2 - a
+baxus - -adjust - initial - target - dimension
+```
+
+or, for PyPi installations,
+
+```bash
 benchmark_runner.py -id 100 -td 1 -n 10 -r 1 -m 1000 -f branin2 -a baxus --adjust-initial-target-dimension
 ```
+
+For Docker, follow the instructions above.
 
 Note that we need to pass an initial target dimensionality with `-td 1` even though this is adjusted later by passing
 the option `--adjust-initial-target-dimension`-
@@ -138,6 +160,59 @@ If you want to use BAxUS with a custom function, you can just use this implement
 `self._call` in the line
 `vals = np.array([self._call(y) for y in x]).squeeze()`
 with a call to your own function expecting a 1D numpy array.
+
+### Example for a custom benchmark function
+
+A custom benchmark function could look as follows:
+
+```python3
+from typing import Union, List
+
+import numpy as np
+from baxus.benchmarks.benchmark_function import Benchmark
+
+
+class Parabula(Benchmark):
+
+    def __init__(self):
+        super().__init__(dim=100, ub=10 * np.ones(100), lb=-10 * np.ones(100), noise_std=0)
+
+    def __call__(self, x: Union[np.ndarray, List[float], List[List[float]]]):
+        x = np.array(x)
+        if x.ndim == 0:
+            x = np.expand_dims(x, 0)
+        if x.ndim == 1:
+            x = np.expand_dims(x, 0)
+        assert x.ndim == 2
+        y = np.sum(x ** 2, axis=1)
+        return y
+```
+
+To run `BAxUS` on it, either register it for the benchmark runner (see explanation below),
+or call `BAxUS` directly:
+
+```python3
+from baxus.baxus import BAxUS
+
+baxus = BAxUS(
+    run_dir="results",
+    max_evals=100,
+    n_init=10,
+    f=Parabula(),
+    target_dim=2,
+    verbose=True,
+)
+
+baxus.optimize()
+
+```
+
+The results of the optimization can afterwards be obtained by
+
+```python3
+x_raw, y_raw = baxus.optimization_results_raw()  # get the points in the search space and their function values
+x_inc, y_inc = baxus.optimization_results_incumbent()  # get the points in the search space and the best function value at each time step
+```
 
 ### How do I register my new function?
 

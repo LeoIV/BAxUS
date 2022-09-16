@@ -6,9 +6,6 @@ cache:
     - .cache/pip
 
 before_script:
-  - python3 -V
-  - pip --version
-  - python --version
   - ulimit -n
   - apt-get update
   - apt-get -y upgrade
@@ -54,6 +51,8 @@ stages:
       junit: report.xml
 
 pip-test-buster-3.8:
+  only:
+    - main
   extends: .pip-test-base
   stage: test
   image: python:3.8-buster
@@ -64,21 +63,29 @@ pip-test-buster-3.9:
   image: python:3.9-buster
 
 pip-test-buster-3.10:
+  only:
+    - main
   extends: .pip-test-base
   stage: test
   image: python:3.10-buster
 
 pip-test-bullseye-3.8:
+  only:
+    - main
   extends: .pip-test-base
   stage: test
   image: python:3.8-bullseye
 
 pip-test-bullseye-3.9:
+  only:
+    - main
   extends: .pip-test-base
   stage: test
   image: python:3.9-bullseye
 
 pip-test-bullseye-3.10:
+  only:
+    - main
   extends: .pip-test-base
   stage: test
   image: python:3.10-bullseye
@@ -89,6 +96,8 @@ requirements-test-buster-3.10:
   image: python:3.10-buster
 
 requirements-test-bullseye-3.10:
+  only:
+    - main
   extends: .requirements-test-base
   stage: test
   image: python:3.10-bullseye
@@ -106,8 +115,11 @@ docker-test:
     - docker build -t ${DOCKER_IMAGE_NAME} .
     - docker run ${DOCKER_IMAGE_NAME} /bin/bash -c "pip install pytest pytest-cov coverage && python -m pytest -v --cov=baxus/ --junitxml=report.xml tests/"
 
+
 build-docs:
   stage: deploy
+  only:
+    - main
   image: python:3.10-buster
   script:
     - apt-get update
@@ -129,9 +141,11 @@ build-docs:
 
 docker-deploy:
   stage: deploy
+  only:
+    - main
+  image: docker:20.10.16
   before_script:
     - ''
-  image: docker:20.10.16
   services:
     - docker:20.10.16-dind
   tags:
@@ -140,4 +154,25 @@ docker-deploy:
     - docker build -t ${DOCKER_IMAGE_NAME} .
     - echo ${DOCKER_PASSWORD} | docker login -u="${DOCKER_USERNAME}" --password-stdin
     - docker push ${DOCKER_IMAGE_NAME}
+
+publish-test-pypi:
+  stage: deploy
+  image: python:3.10-buster
+  script:
+    - pip install --upgrade twine
+    - python setup.py sdist
+    - twine upload -u __token__ -p ${TWINE_TEST_PYPI_PASSWORD} -r testpypi dist/*
+
+publish-pypi:
+  stage: deploy
+  image: python:3.10-buster
+  only:
+    - main
+    - tags
+  script:
+    - pip install --upgrade twine
+    - python setup.py sdist
+    - twine upload -u __token__ -p ${TWINE_PYPI_PASSWORD} dist/*
+
+
 

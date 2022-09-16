@@ -12,9 +12,9 @@ MAX_RETRIES = 1
 
 
 def run_and_plot(
-    m: OptimizationMethod,
-    repetitions: List[int],
-    directory: str,
+        m: OptimizationMethod,
+        repetitions: List[int],
+        directory: str,
 ) -> None:
     """
     Run an experiment for a certain number of repetitions and save the results

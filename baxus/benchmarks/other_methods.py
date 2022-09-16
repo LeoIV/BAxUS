@@ -15,6 +15,13 @@ class OptimizationMethod(ABC):
             run_dir: str,
             conf_name: Optional[str] = None,
     ):
+        """
+        Abstract base class for a generic optimization method.
+
+        Args:
+            run_dir: the directory to store results in
+            conf_name: the algorithm configuration to save to disk
+        """
         if not os.path.exists(run_dir):
             os.makedirs(run_dir, exist_ok=True)
         if conf_name is not None:
@@ -28,6 +35,12 @@ class OptimizationMethod(ABC):
 
     @abstractmethod
     def optimize(self) -> None:
+        """
+        Start the optimization.
+
+        Returns: None
+
+        """
         raise NotImplementedError()
 
     @abstractmethod
@@ -80,6 +93,17 @@ class RandomSearch(OptimizationMethod):
             run_dir: str,
             lower_bounds: np.ndarray,
             upper_bounds: np.ndarray):
+        """
+        Simple random search implementation, samples points uniformly at random in the search space.
+
+        Args:
+            function: the function to optimize
+            input_dim: the dimensionality of the problem
+            max_evals: maximum number of function evaluations
+            run_dir: the directory to save results to
+            lower_bounds: the lower bound of the search space
+            upper_bounds: the upper_bound of the search space
+        """
         super().__init__(run_dir)
 
         self.run_dir = run_dir
@@ -99,6 +123,12 @@ class RandomSearch(OptimizationMethod):
         self.upper_bounds = upper_bounds
 
     def optimize(self) -> None:
+        """
+        Run the optimization.
+
+        Returns: None
+
+        """
         assert not self._optimized
 
         points = np.random.uniform(self.lower_bounds, self.upper_bounds, (self.max_evals, self.input_dim))

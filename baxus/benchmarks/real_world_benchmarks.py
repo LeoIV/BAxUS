@@ -117,8 +117,8 @@ class MoptaSoftConstraints(SyntheticBenchmark):
         # read and parse output file
         output = (
             open(os.path.join(self.directory_name, "output.txt"), "r")
-                .read()
-                .split("\n")
+            .read()
+            .split("\n")
         )
         output = [x.strip() for x in output]
         output = np.array([float(x) for x in output if len(x) > 0])
