@@ -6,7 +6,7 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 setup(
     name="BAxUS",
-    version="0.0.5",
+    version="0.0.6",
     author="Leonard Papenmeier",
     author_email="leonard.papenmeier@cs.lth.se",
     packages=find_packages(),
