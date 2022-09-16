@@ -14,7 +14,7 @@ setup(
         "numpy>=1.21",
         "pandas>=1.4",
         "torch>=1.3",
-        "lasso-bench-fork-leoiv==0.0.5",
+        "lasso-bench-fork-leoiv==0.0.6",
         "botorch>=0.6",
         "gpytorch<=1.8.1",
         "scikit-learn>=1.1",
