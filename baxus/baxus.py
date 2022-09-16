@@ -22,9 +22,8 @@ from typing import Dict, Optional
 import numpy as np
 
 from baxus import EmbeddedTuRBO
-from baxus.util.behaviors import (
-    BaxusBehavior,
-)
+from baxus.benchmarks.benchmark_function import Benchmark
+from baxus.util.behaviors import BaxusBehavior
 from baxus.util.behaviors.gp_configuration import GPBehaviour
 from baxus.util.data_utils import join_data
 from baxus.util.projections import AxUS, ProjectionModel
