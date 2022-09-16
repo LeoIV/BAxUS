@@ -115,11 +115,12 @@ docker-test:
     - docker build -t ${DOCKER_IMAGE_NAME} .
     - docker run ${DOCKER_IMAGE_NAME} /bin/bash -c "pip install pytest pytest-cov coverage && python -m pytest -v --cov=baxus/ --junitxml=report.xml tests/"
 
-
 build-docs:
   stage: deploy
   only:
-    - main
+    - tags
+  except:
+    - /^(?!main).+@/
   image: python:3.10-buster
   script:
     - apt-get update
@@ -142,7 +143,9 @@ build-docs:
 docker-deploy:
   stage: deploy
   only:
-    - main
+    - tags
+  except:
+    - /^(?!main).+@/
   image: docker:20.10.16
   before_script:
     - ''
@@ -167,8 +170,9 @@ publish-pypi:
   stage: deploy
   image: python:3.10-buster
   only:
-    - main
     - tags
+  except:
+    - /^(?!main).+@/
   script:
     - pip install --upgrade twine
     - python setup.py sdist
