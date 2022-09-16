@@ -4,6 +4,7 @@ import os
 import sys
 from datetime import datetime
 from logging import info, warning
+from typing import List
 from zlib import adler32
 
 from baxus import EmbeddedTuRBO
@@ -22,7 +23,7 @@ FORMAT = "%(asctime)s %(levelname)s: %(filename)s: %(message)s"
 DATEFORMAT = '%m/%d/%Y %I:%M:%S %p'
 
 
-def main(argstring: str) -> None:
+def main(argstring: List[str]) -> None:
     """
     Parse the argstring and run algorithms based on the definition.
 
@@ -45,6 +46,7 @@ def main(argstring: str) -> None:
         filename=os.path.join(directory, "logging.log"),
         level=logging.INFO if not args.verbose else logging.DEBUG,
         format=FORMAT,
+        force=True,
         datefmt=DATEFORMAT
     )
 

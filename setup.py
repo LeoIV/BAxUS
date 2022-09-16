@@ -7,6 +7,8 @@ long_description = (this_directory / "README.md").read_text()
 setup(
     name="BAxUS",
     version="0.0.5",
+    author="Leonard Papenmeier",
+    author_email="leonard.papenmeier@cs.lth.se",
     packages=find_packages(),
     install_requires=[
         "numpy>=1.21",
@@ -20,5 +22,8 @@ setup(
     ],
     exclude_package_data={'': ["results/*", "tests/*"]},
     long_description=long_description,
-    long_description_content_type='text/markdown'
+    long_description_content_type='text/markdown',
+    entry_points={
+        'console_scripts': ['benchmark-runner=baxus.util.console_entry_point:bench'],
+    }
 )
