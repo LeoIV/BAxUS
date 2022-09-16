@@ -1,7 +1,11 @@
+from pathlib import Path
+
 from setuptools import setup, find_packages
 
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 setup(
-    name="baxus",
+    name="BAxUS",
     version="0.0.2",
     packages=find_packages(),
     install_requires=[
@@ -14,5 +18,7 @@ setup(
         "scikit-learn>=1.1",
         "parameterized>=0.8",
     ],
-    exclude_package_data={'': ["results/*", "tests/*"]}
+    exclude_package_data={'': ["results/*", "tests/*"]},
+    long_description=long_description,
+    long_description_content_type='text/markdown'
 )
