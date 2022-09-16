@@ -117,10 +117,8 @@ docker-test:
 
 build-docs:
   stage: deploy
-  only:
-    - tags
-  except:
-    - /^(?!main).+@/
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG'
   image: python:3.10-buster
   script:
     - apt-get update
@@ -142,10 +140,8 @@ build-docs:
 
 docker-deploy:
   stage: deploy
-  only:
-    - tags
-  except:
-    - /^(?!main).+@/
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG'
   image: docker:20.10.16
   before_script:
     - ''
@@ -169,10 +165,8 @@ publish-test-pypi:
 publish-pypi:
   stage: deploy
   image: python:3.10-buster
-  only:
-    - tags
-  except:
-    - /^(?!main).+@/
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG'
   script:
     - pip install --upgrade twine
     - python setup.py sdist
