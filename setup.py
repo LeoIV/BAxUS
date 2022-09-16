@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="baxus",
-    version=open("VERSION.md").readline().split(" ")[2],
+    version="0.0.2",
     packages=find_packages(),
     install_requires=[
         "numpy>=1.21",
