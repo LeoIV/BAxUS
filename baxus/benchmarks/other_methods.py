@@ -80,7 +80,7 @@ class OptimizationMethod(ABC):
             ys,
         ) = self.optimization_results_raw()
         assert ys.ndim == 1
-        ys_incumbent = np.array([np.min(ys[:i]) for i in range(1, len(ys) + 1)])
+        ys_incumbent = np.minimum.accumulate(ys)
         return Xs, ys_incumbent
 
 

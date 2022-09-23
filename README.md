@@ -192,7 +192,7 @@ To run `BAxUS` on it, either register it for the benchmark runner (see explanati
 or call `BAxUS` directly:
 
 ```python3
-from baxus.baxus import BAxUS
+from baxus import BAxUS
 
 baxus = BAxUS(
     run_dir="results",
