@@ -4,17 +4,13 @@ from unittest import TestCase
 import numpy as np
 import pytest
 
-from baxus.benchmarks.synthetic_benchmark_functions import (
-    HartmannEffectiveDim,
-    BraninEffectiveDim,
-    RosenbrockEffectiveDim,
-    RotatedHartmann6, AckleyEffectiveDim, LevyEffectiveDim, DixonPriceEffectiveDim, GriewankEffectiveDim,
-    MichalewiczEffectiveDim, RastriginEffectiveDim,
-)
+from baxus.benchmarks import AckleyEffectiveDim, RosenbrockEffectiveDim, LevyEffectiveDim, DixonPriceEffectiveDim, \
+    BraninEffectiveDim, RastriginEffectiveDim, MichalewiczEffectiveDim, GriewankEffectiveDim, HartmannEffectiveDim, \
+    RotatedHartmann6
 from baxus.util.exceptions import EffectiveDimTooLargeException
 
 
-class SyntheticBenchmarkFunctions(TestCase):
+class SyntheticBenchmarkFunctionsTestSuite(TestCase):
     def test_functions(self):
         funs = [AckleyEffectiveDim, RosenbrockEffectiveDim, LevyEffectiveDim, DixonPriceEffectiveDim,
                 GriewankEffectiveDim, MichalewiczEffectiveDim, RastriginEffectiveDim, BraninEffectiveDim,

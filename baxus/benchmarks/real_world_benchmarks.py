@@ -13,10 +13,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVR
 
-from baxus.benchmarks.benchmark_function import (
-    SyntheticBenchmark,
-    EffectiveDimBenchmark,
-)
+from baxus.benchmarks import SyntheticBenchmark, EffectiveDimBenchmark
 
 
 class MoptaSoftConstraints(SyntheticBenchmark):

@@ -230,7 +230,7 @@ def parse(args):
         "--adjust-initial-target-dimension", action="store_true", help="Whether to adjust the initial target dimension"
                                                                        " such that the final split is as close "
                                                                        "as possible to the "
-                                                                       "ambient dimension for AdaTheSBO1."
+                                                                       "ambient dimension for BAxUS."
     )
 
     pars = parser.parse_args(args)

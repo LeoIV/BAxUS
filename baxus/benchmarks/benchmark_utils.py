@@ -6,13 +6,12 @@ from typing import List
 import numpy as np
 import pandas as pd
 
-from baxus.benchmarks.other_methods import OptimizationMethod
 
 MAX_RETRIES = 1
 
 
 def run_and_plot(
-        m: OptimizationMethod,
+        m: "baxus.benchmarks.OptimizationMethod",
         repetitions: List[int],
         directory: str,
 ) -> None:
@@ -23,7 +22,6 @@ def run_and_plot(
         m: the experiment to runm_x
         repetitions: the repetitions to run
         directory: the directory to save the results
-        split_points: whether this experiment has split points
 
     Returns:
         None

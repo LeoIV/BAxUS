@@ -31,7 +31,7 @@ Command line options
      - -td
      - --target-dim
      - 10
-     - (Initial) target dimensionality of the function. Whether initial or not depends on the algorithm. Initial for ``AdaTheSBO-1`` and ``AdaTheSBO-m`` as they adapt the target dimensionality.
+     - (Initial) target dimensionality of the function. Whether initial or not depends on the algorithm. Initial for ``BAxUS`` as it adapts the target dimensionality.
    * - Acquisition function
      - None
      - --acquisition-function

@@ -6,11 +6,7 @@ import numpy as np
 import torch
 from botorch.test_functions import SyntheticTestFunction
 
-from baxus.util.exceptions import (
-    EffectiveDimTooLargeException,
-    OutOfBoundsException,
-    BoundsMismatchException,
-)
+from baxus.util.exceptions import EffectiveDimTooLargeException, BoundsMismatchException, OutOfBoundsException
 
 
 class Benchmark(ABC):
@@ -153,6 +149,7 @@ class EffectiveDimBenchmark(SyntheticBenchmark):
         lb: the lower bounds of the search space
         noise_std: the noise std for this benchmark
     """
+
     def __init__(
             self,
             dim: int,
@@ -161,7 +158,6 @@ class EffectiveDimBenchmark(SyntheticBenchmark):
             lb: np.ndarray,
             noise_std: float,
     ):
-
         super().__init__(dim, ub, lb, noise_std=noise_std)
         self.effective_dim: int = effective_dim
 
@@ -181,6 +177,7 @@ class BoTorchFunctionBenchmark(SyntheticBenchmark):
         lb: the lower bound of the search space
         benchmark_func: the BoTorch benchmark function
     """
+
     def __init__(
             self,
             dim: int,
@@ -236,8 +233,8 @@ class BoTorchFunctionBenchmark(SyntheticBenchmark):
             self._benchmark_func.forward(
                 torch.tensor(np.clip(x, self._lb_vec, self._ub_vec))
             )
-                .numpy()
-                .squeeze()
+            .numpy()
+            .squeeze()
         )
         return res
 

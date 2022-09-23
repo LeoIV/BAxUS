@@ -10,7 +10,7 @@
 ###############################################################################
 
 # Derived from the TuRBO implementation (https://github.com/uber-research/TuRBO)
-# Author: anonymous
+# Author: Leonard Papenmeier <leonard.papenmeier@cs.lth.se>
 
 import math
 from typing import Tuple, Dict, Any, List, Callable

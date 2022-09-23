@@ -7,11 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from baxus.benchmarks.benchmark_function import Benchmark, SyntheticBenchmark
-from baxus.benchmarks.real_world_benchmarks import (
-    SVMBenchmark,
-    MoptaSoftConstraints,
-)
+from baxus.benchmarks import Benchmark, SyntheticBenchmark, SVMBenchmark, MoptaSoftConstraints
 from baxus.util.exceptions import OutOfBoundsException, BoundsMismatchException
 
 

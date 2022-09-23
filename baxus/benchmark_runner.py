@@ -7,11 +7,8 @@ from logging import info, warning
 from typing import List
 from zlib import adler32
 
-from baxus import EmbeddedTuRBO
-from baxus.baxus import BAxUS
-from baxus.benchmarks.benchmark_function import EffectiveDimBenchmark, EffectiveDimBoTorchBenchmark
-from baxus.benchmarks.benchmark_utils import run_and_plot
-from baxus.benchmarks.other_methods import RandomSearch
+from baxus import EmbeddedTuRBO, BAxUS
+from baxus.benchmarks import run_and_plot, EffectiveDimBenchmark, EffectiveDimBoTorchBenchmark, RandomSearch
 from baxus.util.behaviors import BaxusBehavior, EmbeddedTuRBOBehavior
 from baxus.util.behaviors.gp_configuration import GPBehaviour
 from baxus.util.exceptions import ArgumentError

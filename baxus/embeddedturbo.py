@@ -415,7 +415,7 @@ class EmbeddedTuRBO(OptimizationMethod):
             length: the current base length
             gp_behaviour: the behavior definition of the GP
             hypers: the pre-computed GP hyperparameters. If empty, the GP will be trained anew
-            tr_idx: the trust region index (for TuRBO-m, AdaTheSBO-m)
+            tr_idx: the trust region index (for TuRBO-m)
             multiple_lengthscales: whether to use multiple lengthscales
             use_pls: whether to use a PLS kernel
             n_pls_components: number of PLS components for PLS kernel

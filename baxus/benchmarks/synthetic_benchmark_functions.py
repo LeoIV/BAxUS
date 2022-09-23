@@ -14,15 +14,14 @@ from botorch.test_functions import Michalewicz as BotorchMichalewicz
 from botorch.test_functions import Rastrigin as BotorchRastrigin
 from botorch.test_functions import Rosenbrock as BotorchRosenbrock
 
-from baxus.benchmarks.benchmark_function import (
-    EffectiveDimBoTorchBenchmark, )
+from baxus.benchmarks import EffectiveDimBoTorchBenchmark
 
 
 class AckleyEffectiveDim(EffectiveDimBoTorchBenchmark):
     """
     A benchmark function with many local minima (see https://www.sfu.ca/~ssurjano/ackley.html)
 
-    WARNING: This function has its optimum at the origin. This might give a misleading performance for AdaTheSBO
+    WARNING: This function has its optimum at the origin. This might give a misleading performance for BAxUS
     as the origin will always be reachable irregardless of the embedding.
 
     Args:
@@ -188,7 +187,7 @@ class GriewankEffectiveDim(EffectiveDimBoTorchBenchmark):
     """
     The Griewank function with many local minima (see https://www.sfu.ca/~ssurjano/griewank.html)
 
-    WARNING: This function has its optimum at the origin. This might give a misleading performance for AdaTheSBO
+    WARNING: This function has its optimum at the origin. This might give a misleading performance for BAxUS
     as the origin will always be reachable irregardless of the embedding.
 
     Args:
@@ -233,7 +232,7 @@ class RastriginEffectiveDim(EffectiveDimBoTorchBenchmark):
     """
     The Rastrigin function with many local minima (see https://www.sfu.ca/~ssurjano/rastr.html)
 
-    WARNING: This function has its optimum at the origin. This might give a misleading performance for AdaTheSBO
+    WARNING: This function has its optimum at the origin. This might give a misleading performance for BAxUS
     as the origin will always be reachable irregardless of the embedding.
 
     Args:
@@ -251,7 +250,6 @@ class RastriginEffectiveDim(EffectiveDimBoTorchBenchmark):
             ub=np.full(shape=effective_dim, fill_value=5.12),
             benchmark_func=BotorchRastrigin,
         )
-
 
 
 class RotatedHartmann6(EffectiveDimBoTorchBenchmark):

@@ -6,7 +6,7 @@ from typing import Tuple, Optional, Dict, Any
 
 import numpy as np
 
-from baxus.benchmarks.benchmark_function import Benchmark
+from baxus.benchmarks import Benchmark
 
 
 class OptimizationMethod(ABC):

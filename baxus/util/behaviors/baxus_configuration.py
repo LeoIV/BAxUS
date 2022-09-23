@@ -7,7 +7,7 @@ from baxus.util.behaviors.embedded_turbo_configuration import EmbeddedTuRBOBehav
 @dataclass
 class BaxusBehavior(EmbeddedTuRBOBehavior):
     """
-    The behavior of the AdaTheSBO1 algorithm.
+    The behavior of the BAxUS algorithm.
 
     """
 

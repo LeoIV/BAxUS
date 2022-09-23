@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Dict
+from typing import Dict, Sequence
 
 import numpy as np
 
@@ -21,3 +21,23 @@ def join_data(X: np.ndarray, dims_and_bins: Dict[int, int]) -> np.ndarray:
         data_row = X[:, dim]
         X = np.hstack((X, np.tile(data_row, bin - 1).reshape(-1, (len(data_row))).T))
     return X
+
+
+def right_pad_sequence(sequence: Sequence[np.ndarray], dtype=np.float64, fill_value: float = 0.0) -> np.ndarray:
+    """
+    Pads a sequence of 1D NumPy arrays to the same length.
+
+    Args:
+        sequence: sequence of 1D NumPy arrays
+        dtype: the dtype of the result matrix
+        fill_value: the value for the padding
+
+    Returns: a matrix of shape (len(sequence), max_sequence_length) where all rows are filled up with fill_value on the right
+
+    """
+    max_len = max(len(s) for s in sequence)
+    padded_matrix = np.full(shape=(len(sequence), max_len), dtype=dtype, fill_value=fill_value)
+    for i, seq in enumerate(sequence):
+        assert seq.ndim == 1, "Only 1D arrays are supported"
+        padded_matrix[i, 0:len(seq)] = seq
+    return padded_matrix
