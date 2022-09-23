@@ -64,7 +64,7 @@ class AxUS(ProjectionModel):
             self.S = np.eye(self.target_dim)
         else:
             if self.bin_sizing == EmbeddingType.BAXUS:
-                debug("Creating uniform HeSBO embedding.")
+                debug("Creating BAxUS embedding.")
                 input_dim_permutation = np.random.permutation(list(range(self.input_dim)))
 
                 input_dim_bins = np.array_split(input_dim_permutation + 1, self.target_dim)
@@ -76,6 +76,7 @@ class AxUS(ProjectionModel):
                 self.S = mtrx[:, 1:]
 
             elif self.bin_sizing == EmbeddingType.HESBO:
+                debug("Creating HeSBO embedding.")
                 target_dims = np.random.choice(np.arange(self.target_dim), size=self.input_dim)
                 mtrx = np.zeros((self.target_dim, self.input_dim))
                 np.put_along_axis(arr=mtrx, indices=target_dims.reshape((1, self.input_dim)),
