@@ -254,3 +254,18 @@ def fun_mapper():
 
 and that's it. 
 
+## Citation 
+
+Please cite [our paper](https://openreview.net/pdf?id=e4Wf6112DI) if you use the code:
+
+```
+@inproceedings{
+papenmeier2022increasing,
+title={Increasing the Scope as You Learn: Adaptive Bayesian Optimization in Nested Subspaces},
+author={Leonard Papenmeier and Luigi Nardi and Matthias Poloczek},
+booktitle={Advances in Neural Information Processing Systems},
+editor={Alice H. Oh and Alekh Agarwal and Danielle Belgrave and Kyunghyun Cho},
+year={2022},
+url={https://openreview.net/forum?id=e4Wf6112DI}
+}
+```
