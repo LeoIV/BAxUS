@@ -1,5 +1,7 @@
 # Increasing the Scope as You Learn: BAxUS
 
+![figure of splitting method](baxus_figure.png)
+
 This is the code for [our paper](https://openreview.net/pdf?id=e4Wf6112DI):
 `Increasing the Scope as You Learn: Adaptive Bayesian Optimization in Nested Subspaces` (Leonard Papenmeier, Luigi Nardi, and Matthias
 Poloczek)
