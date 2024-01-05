@@ -1,6 +1,6 @@
 # Increasing the Scope as You Learn: BAxUS
 
-> 💡 **_NOTE:_** If you're interested in BAxUS, please consider using (Bounce)[https://github.com/LeoIV/bounce], which comes with an improved trust region management policy, an easier setup, and batch parallelism.
+> 💡 **_NOTE:_** If you're interested in BAxUS, please consider using [Bounce](https://github.com/LeoIV/bounce), which comes with an improved trust region management policy, an easier setup, and batch parallelism.
 
 ![figure of splitting method](baxus_figure.png)
 
